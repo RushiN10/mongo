@@ -1,0 +1,27 @@
+
+	4. Answer the following Queries a. List all the blogs which are tagged as food blogs 
+	b. List all the blogs that are posted by “Amit” 
+	c. List all the blogs that are tagged a “travel blogs” and were created before 2018 and are have comments written by “Sagar” and commented as “like” 
+	d. List all the blogs that have comments which are posted before August 2019 or are not liked by the user posting the comment 
+	
+db.post.insert({title:"online",url:"www.abc.com",tag:["food","travel"],pname:"mukesh",
+pdate:new Date("2019-03-12"),like:89,user:[{name:"abhi",comment:"good",
+message:"do best", cdate:new Date("2020-03-12"),like:1}]})
+
+db.post.insert({title:"wetpet",url:"www.wetpet.com",tag:["food","travel"],
+pname:"Amit",pdate:new Date("2018-03-12"),like:82,user:[{name:"abhi",comment:"good",message:"dobest",time:"4pm",like:1},
+{name:"mukesh",comment:"best",message:"success", cdate:new Dat("2008-11-12"),like:2}]})
+
+db.post.insert({title:"wetpet",url:"www.wetpet.com",tag:["food","travel","magic"],
+pname:"abhijeet",pdate:newDate("2017-03-12"),like:182,
+user:[{name:"sagar",comment:"like",message:"dobest",time:"4pm",like:1},
+{name:"mukesh",comment:"best",message:"success", cdate:new Date("2019-03-12"),like:2}]})
+
+db.post.insert({title:"nonveg",url:"www.non.com",tag:["food","travel","chiken"],pname:"Amit",pdate:new Date("2019-07-12"),
+like:82,user:[{name:"manisha",comment:"good",message:"dobest",time:"4pm",like:0},
+{name:"manasi",comment:"best",message:"success", cdate:new Date("2018-03-12"),like:0}]})
+
+a) >db.post.find({tag:"food"})
+b) >db.post.find({pname:"Amit"})
+c) > db.post.find({tag:"travel",pdate:{"$lte":new Date("2018-03-11")},"user.name":"sagar","user.comment":"like"})
+d) > db.post.find({$or:[{"user.cdate":{$lte:new Date("2019-08-07")}},{"user.like":0}]})

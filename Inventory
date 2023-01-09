@@ -1,0 +1,26 @@
+Model the following inventory information as a document database. 
+
+The inventory keeps track of various items. The items are tagged in various categories. Items may be kept in various warehouses and each warehouse keeps track of the quantity of the item. 
+2. Assume appropriate attributes and collections as per the query requirements 
+3. Insert at least 10 documents in each collection. 
+	4. Answer the following Queries. a. List all items from the inventory where the status equals "D" and qty is greater than 30 
+	b. List all items which have 3 tags 
+	c. List all items having status equal to “A” or having quantity less than 30 and height of the product should be greater than 10 
+	d. Find all warehouse that keeps item “Planner” and having instock quantity less than 20 
+	
+	db.item.insert({itemName:"planner",tag:["wash","food","vehicle"],status:"A",height:5,width:9, 
+	instack:15,warehouse:[{location:"pune",quntity:36},{location:"mumbai",quntity:67}]})
+	
+	db.item.insert({itemName:"toycar",tag:["food","vehicle"],status:"D",height:5,width:9,instack:15,
+	warehouse:[{location:"pune",quntity:36},{location:"mumbai",quntity:67}]})
+	
+	db.item.insert({itemName:"roboticcar",tag:["food","vehicle"],status:"A",height:9,width:9,instack:5,
+	warehouse:[{location:"pune",quntity:26},{location:"mumbai",quntity:17}]})
+	
+	db.item.insert({itemName:"bag",tag:["food","vehicle","school","travel"],status:"c",height:19,width:39,instack:75,
+	warehouse:[{location:"surat",quntity:26},{location:"lanavala",quntity:17}]})
+	
+	a) > db.item.find({status:"D","warehouse.quntity":{$gt:30}})
+	b) > db.item.find({"tag":{$size:3}})
+	c) >db.item.find({$or:[{status:"A"},{"warehouse.quntity":{$lt:30},height:{$gt:10}}]})
+	d) > db.item.find({itemName:"planner",instack:{$lt:20}})

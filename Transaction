@@ -1,0 +1,27 @@
+Model the following transaction information as a document database. 
+
+	4. Answer the following Queries. a. Find all transactions which were made by the user “John” 
+	b. Find all the transactions which were made using debit card 
+	c. Find transaction id and total amount of purchase made using a credit card 
+	d. Find the total payment for each payment type 
+
+
+db.transaction.insert({itemName:"toy",customerName:"john",paymentmode:"debitcard",payment:8000})
+
+db.transaction.insert({itemName:"car",customerName:"john",paymentmode:"creditcard",payment:4000})
+
+db.transaction.insert({itemName:"bag",customerName:"mukesh",paymentmode:"cash",payment:5000})
+
+db.transaction.insert({itemName:"airlineticket",customerName:"rohit",paymentmode:"cash",payment:50090})
+
+db.transaction.insert({itemName:"mango",customerName:"abhijeet",paymentmode:"creditcard",payment:8000})
+
+db.transaction.insert({itemName:"bus",customerName:"manasi",paymentmode:"debitcard",payment:7000})
+
+a) > db.transaction.find({customerName:"john"})
+
+b) > db.transaction.find({paymentmode:"debitcard"})
+
+c) >db.transaction.aggregate([{$match:{"paymentmode":"creditcard"}},{$group:{_id:null,"count":{"$sum":"$payment"}}}])
+
+d) >db.transaction.aggregate([{$group:{_id:"$paymentmode","count":{"$sum":"$payment"}}}])
